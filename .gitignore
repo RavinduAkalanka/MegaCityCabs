@@ -1,0 +1,27 @@
+# Ignore build directories and compiled files
+target/
+build/
+*.class
+*.jar
+*.war
+*.ear
+
+# Ignore IDE and editor-specific files
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.project
+.classpath
+.settings/
+
+# Ignore logs and temp files
+*.log
+logs/
+tmp/
+hs_err_pid*
+
+# Ignore database configuration file inside src/main/java/resources/
+
+
