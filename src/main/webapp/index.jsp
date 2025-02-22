@@ -7,6 +7,7 @@
 <title>Mega City Cabs</title>
 </head>
 <body>
+<%@ include file="../Navbar/navbar.jsp" %>
 
 
 </body>

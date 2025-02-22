@@ -8,22 +8,22 @@ public class DatabaseConfig {
     private static DatabaseConfig instance;
     private Connection connection;
 
-    
-    private static final String URL = "jdbc:mysql://localhost:3306/megacitycabs?characterEncoding=utf8";
+    private static final String URL = "jdbc:mysql://localhost:3306/megacitycabs?characterEncoding=utf8&serverTimezone=UTC";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "Ravi@2001#";
 
     private DatabaseConfig() {
         try {
-            // Load the MySQL JDBC driver
+            // Load the MySQL driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-
-            // Establish the connection to the database
+            
+            // Establish connection
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             System.out.println("Database connection established successfully.");
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            throw new RuntimeException("Database connection failed!");
+            throw new RuntimeException("Database connection failed! Check your credentials and database configuration.", e);
         }
     }
 
@@ -41,4 +41,5 @@ public class DatabaseConfig {
     public Connection getConnection() {
         return connection;
     }
+
 }
