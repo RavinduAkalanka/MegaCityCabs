@@ -1,6 +1,27 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<%
+    // Check if the user is logged in
+    HttpSession session2 = request.getSession(false);
+    if (session2 == null || session2.getAttribute("user") == null) {
+        // Redirect to login page if not logged in
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+        return;
+    }
+
+    // Check if the user is an ADMIN
+    String userRole = (String) session2.getAttribute("role");
+    if (!"ADMIN".equals(userRole)) {
+        // Redirect to access denied page if not an ADMIN
+        response.sendRedirect(request.getContextPath() + "/accessDenied.jsp");
+        return;
+    }
+%>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

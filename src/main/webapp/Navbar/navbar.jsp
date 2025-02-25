@@ -85,7 +85,7 @@
 <%
     String role = (String) session.getAttribute("role");
     if (role == null) {
-        role = "admin";  // Default role
+        role = ""; // Default to empty if no role is found
     }
 %>
 
@@ -100,8 +100,8 @@
         
         <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
             <ul class="navbar-nav">
-                <% if ("admin".equals(role)) { %>
-                    <li class="nav-item"><a class="nav-link" href="/index.jp">Dashboard</a></li>
+                <% if ("ADMIN".equals(role)) { %>
+                    <li class="nav-item"><a class="nav-link" href="./adminDashboard.jsp">Dashboard</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="adminMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Manage
@@ -114,15 +114,15 @@
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="#">Generate Bill</a></li>
-                <% } else if ("staff".equals(role)) { %>
-                    <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+                <% } else if ("STAFF".equals(role)) { %>
+                    <li class="nav-item"><a class="nav-link" href="./staffDashboard.jsp">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Available Cabs</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Bookings</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Generate Bill</a></li>
                 <% } %>
             </ul>
 
-            <a class="nav-link logout-btn ms-auto" href="logout.jsp">Logout</a>
+            <a class="nav-link logout-btn ms-auto" href="logout-servlet">Logout</a>
         </div>
     </div>
 </nav>

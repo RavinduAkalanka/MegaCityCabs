@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.bms.dao.StaffDAO;
 import com.bms.dao.StaffDAOImpl;
 import com.bms.dto.StaffDTO;
 import com.bms.model.Staff;
@@ -12,7 +13,7 @@ import com.bms.enums.Role;
 
 public class StaffController {
 
-    private StaffDAOImpl staffDAO = new StaffDAOImpl();
+    private StaffDAO staffDAO = new StaffDAOImpl();
 
     //Add Staff
     public boolean addStaff(StaffDTO staffDTO) {
