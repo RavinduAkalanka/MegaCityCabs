@@ -10,4 +10,6 @@ public interface StaffDAO {
 	Staff getStaffById(int userId);
 	boolean updateStaff(Staff staff);
 	boolean deleteStaff(int userId);
+	boolean isEmailExists(String email, int userId);  
+    int getTotalStaffCount();
 }
