@@ -107,7 +107,7 @@
                             Manage
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="adminMenu">
-                            <li><a class="dropdown-item" href="#">Manage Vehicles</a></li>
+                            <li><a class="dropdown-item" href="cab-servlet">Manage Cabs</a></li>
                             <li><a class="dropdown-item" href="#">Manage Drivers</a></li>
                             <li><a class="dropdown-item" href="staff-servlet">Manage Staff</a></li>
                             <li><a class="dropdown-item" href="#">Manage Bookings</a></li>
