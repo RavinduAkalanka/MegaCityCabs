@@ -7,30 +7,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bms.controllers.CabController;
+import com.bms.controllers.DriverController;
 
-@WebServlet("/cab-delete-servlet")
-public class CabDeleteServlet extends HttpServlet {
+@WebServlet("/driver-delete-servlet")
+public class DriverDeleteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private CabController cabController = new CabController();
+    private DriverController driverController = new DriverController();
 
-    public CabDeleteServlet() {
+    public DriverDeleteServlet() {
         super();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        int cabId = Integer.parseInt(request.getParameter("cabId"));
-
-        boolean isDeleted = cabController.deleteCab(cabId);
+ 
+        int driverId = Integer.parseInt(request.getParameter("driverId"));
+        
+        boolean isDeleted = driverController.deleteDriver(driverId);
 
         if (isDeleted) {
-            response.sendRedirect(request.getContextPath() + "/cab-servlet?alertType=success&alertMessage=Cab deleted successfully!");
+            response.sendRedirect(request.getContextPath() + "/driver-servlet?alertType=success&alertMessage=Driver deleted successfully!");
         } else {
-            response.sendRedirect(request.getContextPath() + "/cab-servlet?alertType=danger&alertMessage=Failed to delete cab.");
+            response.sendRedirect(request.getContextPath() + "/driver-servlet?alertType=danger&alertMessage=Failed to delete driver.");
         }
     }
 
