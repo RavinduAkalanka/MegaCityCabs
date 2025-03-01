@@ -27,17 +27,34 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession session = httpRequest.getSession(false);
 
-        // Check if the user is logged in
-        boolean isLoggedIn = (session != null && session.getAttribute("user") != null);
-
         // Get the requested URL
         String requestURI = httpRequest.getRequestURI();
 
-        // Allow access to login.jsp and login-servlet without authentication
-        if (requestURI.endsWith("login.jsp") || requestURI.endsWith("login-servlet")) {
-            chain.doFilter(request, response); // Allow the request to proceed
+
+        // Redirect root URL ("/") to index.jsp
+        if (requestURI.equals(httpRequest.getContextPath() + "/")) {
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/index-servlet");
             return;
         }
+
+        // Allow access to public pages without authentication
+        if (requestURI.endsWith("index.jsp") || 
+            requestURI.endsWith("login.jsp") || 
+            requestURI.endsWith("login-servlet") || 
+            requestURI.endsWith(".css") || 
+            requestURI.endsWith(".js") || 
+            requestURI.endsWith(".jpg") || 
+            requestURI.endsWith(".png") || 
+            requestURI.contains("customer-view-cab-servelet") || 
+            requestURI.contains("CustomerViewCabServelet") ||
+            requestURI.contains("index-servlet") ||
+            requestURI.endsWith("availableCab.jsp")) { 
+            chain.doFilter(request, response); 
+            return;
+        }
+
+        // Check if the user is logged in
+        boolean isLoggedIn = (session != null && session.getAttribute("user") != null);
 
         // Redirect unauthenticated users to the login page
         if (!isLoggedIn) {
@@ -48,7 +65,6 @@ public class AuthenticationFilter implements Filter {
         // Allow authenticated users to access other pages
         chain.doFilter(request, response);
     }
-
     @Override
     public void destroy() {
         // Cleanup logic (if needed)
