@@ -110,14 +110,14 @@
                             <li><a class="dropdown-item" href="cab-servlet">Manage Cabs</a></li>
                             <li><a class="dropdown-item" href="driver-servlet">Manage Drivers</a></li>
                             <li><a class="dropdown-item" href="staff-servlet">Manage Staff</a></li>
-                            <li><a class="dropdown-item" href="#">Manage Bookings</a></li>
+                            <li><a class="dropdown-item" href="booking-list-servlet">Manage Bookings</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="#">Generate Bill</a></li>
                 <% } else if ("STAFF".equals(role)) { %>
                     <li class="nav-item"><a class="nav-link" href="./staffDashboard.jsp">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Available Cabs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Bookings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="booking-list-servlet">Bookings</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Generate Bill</a></li>
                 <% } %>
             </ul>

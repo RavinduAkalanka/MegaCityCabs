@@ -24,10 +24,10 @@ public class CabViewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Retrieve the cabId from the request
+        
         int cabId = Integer.parseInt(request.getParameter("cabId"));
 
-        // Fetch the cab details from the database
+        
         CabDTO cab = cabController.getCabById(cabId);
 
         if (cab != null) {

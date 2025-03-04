@@ -286,11 +286,11 @@
                 <c:forEach var="cab" items="${limitedCabList}">
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
-                            <img src="${cab.cabImgUrl}" class="card-img-top" alt="${cab.model}">
+                            <img src="${cab.cabImgUrl}" class="card-img-top" alt="${cab.model}" style="width: 100%; height: 300px; object-fit: cover;">
                             <div class="card-body text-center">
                                 <h5 class="card-title">${cab.model}</h5>
                                 <p class="card-text">Price per KM: Rs.<fmt:formatNumber value="${cab.pricePerKM}" pattern="#.00" /></p>
-                                <a href="#" class="btn custom-btn">Book Now</a>
+                                <a href="booking-servlet?action=showBookingForm&cabId=${cab.cabId}" class="btn custom-btn">Book Now</a>
                             </div>
                         </div>
                     </div>

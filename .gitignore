@@ -1,3 +1,7 @@
+# Ignore database and email configuration files
+WEB-INF/classes/db.properties
+WEB-INF/classes/email.properties
+
 # Ignore build directories and compiled files
 target/
 build/
@@ -21,7 +25,3 @@ build/
 logs/
 tmp/
 hs_err_pid*
-
-# Ignore database configuration file inside src/main/java/resources/
-
-

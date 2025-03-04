@@ -17,5 +17,7 @@
 	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/javax.servlet-3.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/mysql-connector-j-9.2.0/mysql-connector-j-9.2.0/mysql-connector-j-9.2.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/jbcrypt-0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/javax.mail-1.6.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
