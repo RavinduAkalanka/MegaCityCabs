@@ -1,6 +1,6 @@
 # Ignore database and email configuration files
-WEB-INF/classes/db.properties
-WEB-INF/classes/email.properties
+src/main/webapp/WEB-INF/classes/db.properties
+src/main/webapp/WEB-INF/classes/email.properties
 
 # Ignore build directories and compiled files
 target/
