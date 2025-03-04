@@ -48,6 +48,8 @@ public class AuthenticationFilter implements Filter {
             requestURI.contains("customer-view-cab-servelet") || 
             requestURI.contains("CustomerViewCabServelet") ||
             requestURI.contains("index-servlet") ||
+            requestURI.endsWith("addBooking.jsp") || 
+            requestURI.endsWith("booking-servlet") ||
             requestURI.endsWith("availableCab.jsp")) { 
             chain.doFilter(request, response); 
             return;

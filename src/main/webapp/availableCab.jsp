@@ -13,7 +13,7 @@
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f8f9fa;
-            padding-top: 50px; /* Reduced padding-top */
+            padding-top: 50px; 
         }
         .cab-card {
             border: none;
@@ -47,7 +47,7 @@
         .custom-btn {
         background-color: #FFBF00 !important;
         border-color: #FFBF00 !important;
-        color: black !important; /* Change text color if needed */
+        color: black !important; 
         } 
         .pagination {
             justify-content: center;
@@ -66,17 +66,16 @@
             border-color: #e6a800;
             color: #fff;
         }
-        .back-link {
-            display: inline-block; /* Changed to inline-block */
-            font-size: 1.1rem;
-            color: #FFBF00;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            margin-bottom: 20px; /* Added margin-bottom */
+        .btn-back {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-bottom: 20px;
         }
-        .back-link:hover {
-            color: #e6a800;
-            text-decoration: underline;
+        .btn-back:hover {
+            background-color: #5a6268;
         }
         .header {
             display: flex;
@@ -97,7 +96,7 @@
     <div class="container">
         <!-- Back Link on the Left -->
         <div class="header">
-            <a href="index-servlet" class="back-link">Back to Home</a>
+            <a href="index-servlet" class="btn btn-back">Back to Home</a>
             <h2 class="text-center">Available Cabs</h2>
             <div></div> <!-- Empty div for spacing -->
         </div>
@@ -111,7 +110,7 @@
                         <div class="card-body">
                             <h5 class="card-title">${cab.model}</h5>
                             <p class="card-text">Price per KM: Rs.<fmt:formatNumber value="${cab.pricePerKM}" pattern="#.00" /></p>
-                            <a href="#" class="btn custom-btn">Book Now</a>
+                            <a href="booking-servlet?action=showBookingForm&cabId=${cab.cabId}" class="btn custom-btn">Book Now</a>
                         </div>
                     </div>
                 </div>

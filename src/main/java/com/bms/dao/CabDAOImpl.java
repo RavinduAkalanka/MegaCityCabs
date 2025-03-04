@@ -66,9 +66,9 @@ public class CabDAOImpl implements CabDAO {
                      "FROM Cab ORDER BY cabId DESC LIMIT ?, ?";
 
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
-            // Set parameters for pagination
-            pst.setInt(1, (pageNumber - 1) * pageSize); // Offset
-            pst.setInt(2, pageSize); // Limit
+            
+            pst.setInt(1, (pageNumber - 1) * pageSize); 
+            pst.setInt(2, pageSize); 
 
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
@@ -100,7 +100,7 @@ public class CabDAOImpl implements CabDAO {
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getInt(1); // Return the count
+                    return rs.getInt(1); 
                 }
             }
         } catch (SQLException e) {
