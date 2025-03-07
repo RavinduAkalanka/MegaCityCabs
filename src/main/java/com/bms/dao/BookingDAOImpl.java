@@ -186,7 +186,6 @@ public class BookingDAOImpl implements BookingDAO {
 	        }
 	        return 0;
 	    }
-
 	 
 	 
 	 //Get Booking By Id

@@ -64,6 +64,8 @@ public class BookingController {
 		return bookingDAO.addBooking(booking);
 	}
 	
+	
+	//Get All Booking
 	public List<BookingDTO> getAllBookings(int pageNumber, int pageSize) {
 	    List<Booking> bookingList = bookingDAO.getAllBookings(pageNumber, pageSize);
 
