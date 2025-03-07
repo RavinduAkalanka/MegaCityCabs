@@ -23,7 +23,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Manage Bookings</title>
+    <title>Manage Bill Process</title>
     <!-- Bootstrap 5 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -44,14 +44,14 @@
             background-color: #f9f9f9;
         }
         .btn-yellow {
-            background-color: #007bff !important;
-            color: white !important;
+            background-color: #FFBF00 !important; /* Custom yellow color */
+            color: black !important; /* Text color */
             border-radius: 10px !important;
-            padding: 10px 20px !important;
+            padding: 5px 15px !important;
             transition: background-color 0.3s ease !important;
         }
         .btn-yellow:hover {
-            background-color: #0056b3 !important;
+            background-color: #e6ac00 !important; /* Darker shade on hover */
             transform: scale(1.05) !important;
         }
         .btn-sm {
@@ -92,7 +92,7 @@
 
     <div class="container">
         <div class="header">
-            <h2 class="text fw-bold">Booking Management</h2>
+            <h2 class="text fw-bold">Generate Bill</h2>
         </div>
 
         <div class="card">
@@ -108,12 +108,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:if test="${empty bookingList}">
+                    <c:if test="${empty confirmBookingList}">
                         <tr>
-                            <td colspan="6">No booking records found.</td>
+                            <td colspan="6">No confirmed bookings found.</td>
                         </tr>
                     </c:if>
-                    <c:forEach var="booking" items="${bookingList}">
+                    <c:forEach var="booking" items="${confirmBookingList}">
                         <tr>
                             <td>${booking.bookingId}</td>
                             <td>${booking.customerName}</td>
@@ -122,24 +122,11 @@
                                 <fmt:formatDate value="${booking.createdAt}" pattern="yyyy-MM-dd" />
                             </td>
                             <td>
-                                <c:choose>
-                                   <c:when test="${booking.bookingStatus.toString() eq 'CONFIRMED'}">
-                                        <span class="badge bg-success">Confirmed</span>
-                                   </c:when>
-                                   <c:when test="${booking.bookingStatus.toString() eq 'PENDING'}">
-                                        <span class="badge bg-warning">Pending</span>
-                                   </c:when>
-                                   <c:when test="${booking.bookingStatus.toString() eq 'REJECTED'}">
-                                        <span class="badge bg-danger">Rejected</span>
-                                   </c:when>
-                                   <c:otherwise>
-                                        <span class="badge bg-secondary">${booking.bookingStatus}</span>
-                                   </c:otherwise>
-                                </c:choose>
+                                <span class="badge bg-success">Confirmed</span>
                             </td>
                             <td>
-                                <a href="<%= request.getContextPath() %>/manage-booking-servlet?bookingId=${booking.bookingId}" 
-                                   class="btn btn-info btn-sm">View</a>
+                                <a href="<%= request.getContextPath() %>/create-bill-servlet?bookingId=${booking.bookingId}" 
+                                   class="btn btn-yellow btn-sm">Create Bill</a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -152,7 +139,7 @@
             <ul class="pagination justify-content-center">
                 <c:if test="${pageNumber > 1}">
                     <li class="page-item">
-                        <a class="page-link" href="booking-list-servlet?page=${pageNumber - 1}">Previous</a>
+                        <a class="page-link" href="confirmed-booking-list-servlet?page=${pageNumber - 1}">Previous</a>
                     </li>
                 </c:if>
                 <li class="page-item">
@@ -160,7 +147,7 @@
                 </li>
                 <c:if test="${pageNumber < totalPages}">
                     <li class="page-item">
-                        <a class="page-link" href="booking-list-servlet?page=${pageNumber + 1}">Next</a>
+                        <a class="page-link" href="confirmed-booking-list-servlet?page=${pageNumber + 1}">Next</a>
                     </li>
                 </c:if>
             </ul>
