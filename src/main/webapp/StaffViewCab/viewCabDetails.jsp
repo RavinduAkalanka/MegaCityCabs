@@ -13,7 +13,7 @@
 
     // Check if the user is STAFF
     String userRole = (String) session2.getAttribute("role");
-    if (!"ADMIN".equals(userRole)) {
+    if (!"STAFF".equals(userRole)) {
         // Redirect to access denied page if not STAFF
         response.sendRedirect(request.getContextPath() + "/accessDenied.jsp");
         return;
@@ -90,7 +90,7 @@
 
     <!-- Back Button -->
     <div class="text-center mt-4">
-        <a href="<%= request.getContextPath() %>/cab-servlet" class="btn btn-secondary">Back to Cab List</a>
+        <a href="<%= request.getContextPath() %>/staff-view-cab-servlet" class="btn btn-secondary">Back</a>
     </div>
 </div>
 
