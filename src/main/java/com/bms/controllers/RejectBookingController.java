@@ -7,7 +7,9 @@ import com.bms.util.EmailUtil;
 public class RejectBookingController {
 
     private RejectBookingDAO rejectBookingDAO = new RejectBookingDAOImpl();
+    
 
+    // Reject Booking
     public boolean rejectBooking(int bookingId, int rejectedBy) {
         try {
             
@@ -22,7 +24,6 @@ public class RejectBookingController {
                 rejectBookingDAO.updateDriverAvailability(driverId, true); 
             }
 
-            // Update booking status to REJECTED
             boolean isRejected = rejectBookingDAO.updateBookingStatus(bookingId, "REJECTED", rejectedBy);
 
             

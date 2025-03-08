@@ -7,7 +7,8 @@ import com.bms.util.EmailUtil;
 public class ConfirmBookingController {
     
     private ConfirmBookingDAO confirmBookingDAO = new ConfirmBookingDAOImpl();
-
+    
+    // Confirm Booking
     public boolean confirmBooking(int bookingId, int approvedBy) {
         boolean isConfirmed = confirmBookingDAO.updateBookingStatus(bookingId, "CONFIRMED", approvedBy);
 

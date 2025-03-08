@@ -9,13 +9,13 @@ public class Cab {
     private String owner;
     private String fuelType;
     private double pricePerKM;
-    private boolean isAvailable; // boolean type
+    private boolean isAvailable; 
     private int capacity;
     private Date registrationDate;
     private String cabImgUrl;
     private String description;
 
-    // Constructors
+    
     public Cab() {}
 
     public Cab(String model, String vehicleNo, String owner, String fuelType, double pricePerKM, boolean isAvailable, int capacity, Date registrationDate, String cabImgUrl, String description) {
@@ -24,14 +24,14 @@ public class Cab {
         this.owner = owner;
         this.fuelType = fuelType;
         this.pricePerKM = pricePerKM;
-        this.isAvailable = isAvailable; // boolean type
+        this.isAvailable = isAvailable; 
         this.capacity = capacity;
         this.registrationDate = registrationDate;
         this.cabImgUrl = cabImgUrl;
         this.description = description;
     }
 
-    // Getters and Setters
+    
     public int getCabId() {
         return cabId;
     }

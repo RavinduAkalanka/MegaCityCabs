@@ -13,6 +13,7 @@ import com.bms.model.Driver;
 public class AvailableDriversDAOImpl implements AvailableDriversDAO {
 	private Connection connection = DatabaseConfig.getInstance().getConnection();
 
+	// Get All Available Drivers
 	@Override
     public List<Driver> getAllAvailableDrivers() {
         List<Driver> driverList = new ArrayList<>();

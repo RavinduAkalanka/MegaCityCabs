@@ -12,7 +12,7 @@ import com.bms.model.User;
 public class UserDAOImpl implements UserDAO {
 	private Connection connection = DatabaseConfig.getInstance().getConnection();
 
-	//Find user for login.
+	// Find user for login.
 	@Override
 	public User findUserByEmail(String email) {
 		String sql = "SELECT * FROM User WHERE email = ?";

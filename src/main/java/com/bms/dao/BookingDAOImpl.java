@@ -127,49 +127,57 @@ public class BookingDAOImpl implements BookingDAO {
         }
         return isBookingAdded;
     }
-	
-	
+		
+    // Get All Bookings 
+	@Override
+	public List<Booking> getAllBookings(int pageNumber, int pageSize, String status) {
+	    List<Booking> bookingList = new ArrayList<>();
+	    String sql = "SELECT bookingId, customerName, nationalId, customerEmail, customerContactNo, address, " +
+	                 "bookingFrom, bookingTo, pickupLocation, cabId, driverId, bookingStatus, approvedBy, rejectBy, createdAt " +
+	                 "FROM Booking ";
 
-	//Get All Booking
-	 @Override
-	    public List<Booking> getAllBookings(int pageNumber, int pageSize) {
-	        List<Booking> bookingList = new ArrayList<>();
-	        String sql = "SELECT bookingId, customerName, nationalId, customerEmail, customerContactNo, address, " +
-	                     "bookingFrom, bookingTo, pickupLocation, cabId, driverId, bookingStatus, approvedBy, rejectBy, createdAt " +
-	                     "FROM Booking ORDER BY bookingId DESC LIMIT ?, ?";
-
-	        try (PreparedStatement pst = connection.prepareStatement(sql)) {
-	            
-	            pst.setInt(1, (pageNumber - 1) * pageSize); 
-	            pst.setInt(2, pageSize);
-
-	            try (ResultSet rs = pst.executeQuery()) {
-	                while (rs.next()) {
-	                    Booking booking = new Booking();
-	                    booking.setBookingId(rs.getInt("bookingId"));
-	                    booking.setCustomerName(rs.getString("customerName"));
-	                    booking.setNationalId(rs.getString("nationalId"));
-	                    booking.setCustomerEmail(rs.getString("customerEmail"));
-	                    booking.setCustomerContactNo(rs.getString("customerContactNo"));
-	                    booking.setAddress(rs.getString("address"));
-	                    booking.setBookingFrom(rs.getDate("bookingFrom"));
-	                    booking.setBookingTo(rs.getDate("bookingTo"));
-	                    booking.setPickupLocation(rs.getString("pickupLocation"));
-	                    booking.setCabId(rs.getInt("cabId"));
-	                    booking.setDriverId(rs.getInt("driverId"));
-	                    booking.setBookingStatus(BookingStatus.valueOf(rs.getString("bookingStatus")));
-	                    booking.setApprovedBy(rs.getInt("approvedBy"));
-	                    booking.setRejectedBy(rs.getInt("rejectBy"));
-	                    booking.setCreatedAt(rs.getDate("createdAt"));
-	                    bookingList.add(booking);
-	                }
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-	        return bookingList;
+	    if (!"ALL".equalsIgnoreCase(status)) {
+	        sql += "WHERE bookingStatus = ? ";
 	    }
 
+	    sql += "ORDER BY bookingId DESC LIMIT ?, ?";
+
+	    try (PreparedStatement pst = connection.prepareStatement(sql)) {
+	        int paramIndex = 1;
+
+	        if (!"ALL".equalsIgnoreCase(status)) {
+	            pst.setString(paramIndex++, status);
+	        }
+
+	        pst.setInt(paramIndex++, (pageNumber - 1) * pageSize);
+	        pst.setInt(paramIndex, pageSize);
+
+	        try (ResultSet rs = pst.executeQuery()) {
+	            while (rs.next()) {
+	                Booking booking = new Booking();
+	                booking.setBookingId(rs.getInt("bookingId"));
+	                booking.setCustomerName(rs.getString("customerName"));
+	                booking.setNationalId(rs.getString("nationalId"));
+	                booking.setCustomerEmail(rs.getString("customerEmail"));
+	                booking.setCustomerContactNo(rs.getString("customerContactNo"));
+	                booking.setAddress(rs.getString("address"));
+	                booking.setBookingFrom(rs.getDate("bookingFrom"));
+	                booking.setBookingTo(rs.getDate("bookingTo"));
+	                booking.setPickupLocation(rs.getString("pickupLocation"));
+	                booking.setCabId(rs.getInt("cabId"));
+	                booking.setDriverId(rs.getInt("driverId"));
+	                booking.setBookingStatus(BookingStatus.valueOf(rs.getString("bookingStatus")));
+	                booking.setApprovedBy(rs.getInt("approvedBy"));
+	                booking.setRejectedBy(rs.getInt("rejectBy"));
+	                booking.setCreatedAt(rs.getDate("createdAt"));
+	                bookingList.add(booking);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return bookingList;
+	}
 	 
 	 //Get Total Booking Count
 	 @Override

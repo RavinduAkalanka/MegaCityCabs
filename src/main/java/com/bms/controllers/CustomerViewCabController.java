@@ -12,13 +12,12 @@ public class CustomerViewCabController {
 	
 	private CustomerViewCabDAO customerViewCabDAO = new CustomerViewCabDAOImpl();
 	
-	//Get All Cabs
 	
+	// Get All Cabs
 	public List<CabDTO> getAllAvailableCabs(int pageNumber, int pageSize) {
-        // Fetch available cabs from the DAO with pagination
+        
         List<Cab> cabList = customerViewCabDAO.getAllCabs(pageNumber, pageSize);
 
-        // Convert Cab objects to CabDTO objects
         List<CabDTO> cabDTOList = new ArrayList<>();
         for (Cab cab : cabList) {
             cabDTOList.add(new CabDTO(
@@ -39,6 +38,7 @@ public class CustomerViewCabController {
         return cabDTOList;
     }
 	
+	
 	//Get Total Page
     public int getTotalPages(int pageSize) {
         int totalCab = customerViewCabDAO.getTotalCabCount();
@@ -48,8 +48,7 @@ public class CustomerViewCabController {
     // Get Only 3 Cabs
     public List<CabDTO> getLimitedCabs(int limit) {
         List<Cab> cabList = customerViewCabDAO.getLimitedCabs(limit);
-        
-        
+              
         List<CabDTO> cabDTOList = new ArrayList<>();
         for (Cab cab : cabList) {
             cabDTOList.add(new CabDTO(

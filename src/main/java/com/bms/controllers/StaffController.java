@@ -17,14 +17,14 @@ public class StaffController {
 
     //Add Staff
     public boolean addStaff(StaffDTO staffDTO) {
-        // Validate or perform logic here if needed (e.g., check email existence)
+       
         if (staffDAO.isEmailExists(staffDTO.getEmail(), -1)) {
-            return false; // Email already exists
+            return false; 
         }
         
-        // Generate the createDate on the server side
+        
         Date createDate = new Date();
-        // Convert DTO to Model object
+        
         Staff staff = new Staff(
         	    staffDTO.getName(),
         	    staffDTO.getEmail(),
@@ -34,7 +34,6 @@ public class StaffController {
         	    createDate
         	);
         
-        // Add staff to the database
         return staffDAO.addStaff(staff);
     }
     
@@ -65,7 +64,6 @@ public class StaffController {
         int totalStaff = staffDAO.getTotalStaffCount();
         return (int) Math.ceil((double) totalStaff / pageSize);
     }
-    
     
     
     //Get Staff By Id

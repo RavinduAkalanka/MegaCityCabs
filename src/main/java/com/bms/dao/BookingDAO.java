@@ -9,7 +9,7 @@ import com.bms.model.Cab;
 public interface BookingDAO {
 	Cab getCabById(int cabId);
 	boolean addBooking(Booking booking);
-	List<Booking> getAllBookings(int pageNumber, int pageSize);
+	List<Booking> getAllBookings(int pageNumber, int pageSize, String status);
 	int getTotalBookingCount();
 	Booking getBookingById(int bookingId);
 	String getCabModelById(int cabId); 

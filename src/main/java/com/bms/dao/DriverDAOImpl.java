@@ -54,7 +54,7 @@ public class DriverDAOImpl implements DriverDAO {
 	}
 	
 	
-	//Add Driver
+	// Add Driver
 	@Override
 	public boolean addDriver(Driver driver) {
 	    String sql = "INSERT INTO Driver (driverName, email, contactNo, licenseNo, address, isAvailable, registerDate) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -75,8 +75,7 @@ public class DriverDAOImpl implements DriverDAO {
 	}
 
 
-
-	//Get All Drivers
+	// Get All Drivers
 	@Override
     public List<Driver> getAllDrivers(int pageNumber, int pageSize) {
         List<Driver> driverList = new ArrayList<>();
@@ -109,6 +108,7 @@ public class DriverDAOImpl implements DriverDAO {
     }
 
 
+	// Get Total Driver Count
 	@Override
     public int getTotalDriverCount() {
         String sql = "SELECT COUNT(*) FROM Driver";
@@ -153,7 +153,7 @@ public class DriverDAOImpl implements DriverDAO {
 	    }
 
 
-
+	 // Update Driver
 	 @Override
 	 public boolean updateDriver(Driver driver) {
 	    
@@ -186,8 +186,6 @@ public class DriverDAOImpl implements DriverDAO {
 	 }
 
 
-	 
- 
 	 // Delete Driver
 	 @Override
 	 public boolean deleteDriver(int driverId) {

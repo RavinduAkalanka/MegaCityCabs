@@ -2,21 +2,18 @@ package com.bms.servlets;
 
 import java.io.IOException;
 import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.bms.controllers.BookingController;
 import com.bms.dto.BookingDTO;
 
 @WebServlet("/booking-list-servlet")
 public class BookingListServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
     private BookingController bookingController = new BookingController();
 
     public BookingListServlet() {
@@ -25,9 +22,14 @@ public class BookingListServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int pageSize = 7; 
-        int pageNumber = 1; 
+        int pageNumber = 1;
+        String status = request.getParameter("status"); 
 
-       
+        
+        if (status == null || status.isEmpty()) {
+            status = "ALL";
+        }
+
         String pageParam = request.getParameter("page");
         if (pageParam != null) {
             try {
@@ -37,15 +39,14 @@ public class BookingListServlet extends HttpServlet {
             }
         }
 
-        List<BookingDTO> bookingList = bookingController.getAllBookings(pageNumber, pageSize);
+        List<BookingDTO> bookingList = bookingController.getAllBookings(pageNumber, pageSize, status);
         int totalPages = bookingController.getTotalPages(pageSize);
 
-        
         request.setAttribute("bookingList", bookingList);
         request.setAttribute("pageNumber", pageNumber);
         request.setAttribute("totalPages", totalPages);
+        request.setAttribute("selectedStatus", status);
 
-        
         RequestDispatcher dispatcher = request.getRequestDispatcher("/Booking/bookingList.jsp");
         dispatcher.forward(request, response);
     }

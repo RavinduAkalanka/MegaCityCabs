@@ -40,22 +40,16 @@
             color: black;
             font-weight: bold;
         }
-        .table-striped tbody tr:nth-child(odd) {
-            background-color: #f9f9f9;
-        }
         .btn-yellow {
             background-color: #007bff !important;
             color: white !important;
             border-radius: 10px !important;
             padding: 10px 20px !important;
-            transition: background-color 0.3s ease !important;
+            transition: background-color 0.3s ease, transform 0.2s ease !important;
         }
         .btn-yellow:hover {
             background-color: #0056b3 !important;
             transform: scale(1.05) !important;
-        }
-        .btn-sm {
-            padding: 5px 15px;
         }
         .card {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -79,11 +73,8 @@
         .table th, .table td {
             vertical-align: middle;
         }
-        .table .btn-info {
-            transition: transform 0.2s ease;
-        }
-        .table .btn-info:hover {
-            transform: scale(1.1);
+        .filter-dropdown {
+            width: 200px;
         }
     </style>
 </head>
@@ -93,6 +84,16 @@
     <div class="container">
         <div class="header">
             <h2 class="text fw-bold">Booking Management</h2>
+            <form action="booking-list-servlet" method="GET" class="d-flex">
+                <select class="form-select filter-dropdown me-2" name="status" onchange="this.form.submit()">
+                    <option value="ALL" ${selectedStatus == 'ALL' ? 'selected' : ''}>All Bookings</option>
+                    <option value="PENDING" ${selectedStatus == 'PENDING' ? 'selected' : ''}>Pending</option>
+                    <option value="CONFIRMED" ${selectedStatus == 'CONFIRMED' ? 'selected' : ''}>Confirmed</option>
+                    <option value="COMPLETED" ${selectedStatus == 'COMPLETED' ? 'selected' : ''}>Completed</option>
+                    <option value="REJECTED" ${selectedStatus == 'REJECTED' ? 'selected' : ''}>Rejected</option>
+                </select>
+                <input type="hidden" name="page" value="1">
+            </form>
         </div>
 
         <div class="card">
@@ -123,14 +124,17 @@
                             </td>
                             <td>
                                 <c:choose>
-                                   <c:when test="${booking.bookingStatus.toString() eq 'CONFIRMED'}">
+                                   <c:when test="${booking.bookingStatus eq 'CONFIRMED'}">
                                         <span class="badge bg-success">Confirmed</span>
                                    </c:when>
-                                   <c:when test="${booking.bookingStatus.toString() eq 'PENDING'}">
+                                   <c:when test="${booking.bookingStatus eq 'PENDING'}">
                                         <span class="badge bg-warning">Pending</span>
                                    </c:when>
-                                   <c:when test="${booking.bookingStatus.toString() eq 'REJECTED'}">
+                                   <c:when test="${booking.bookingStatus eq 'REJECTED'}">
                                         <span class="badge bg-danger">Rejected</span>
+                                   </c:when>
+                                   <c:when test="${booking.bookingStatus eq 'COMPLETED'}">
+                                        <span class="badge bg-primary">Completed</span>
                                    </c:when>
                                    <c:otherwise>
                                         <span class="badge bg-secondary">${booking.bookingStatus}</span>
@@ -152,7 +156,7 @@
             <ul class="pagination justify-content-center">
                 <c:if test="${pageNumber > 1}">
                     <li class="page-item">
-                        <a class="page-link" href="booking-list-servlet?page=${pageNumber - 1}">Previous</a>
+                        <a class="page-link" href="booking-list-servlet?page=${pageNumber - 1}&status=${selectedStatus}">Previous</a>
                     </li>
                 </c:if>
                 <li class="page-item">
@@ -160,7 +164,7 @@
                 </li>
                 <c:if test="${pageNumber < totalPages}">
                     <li class="page-item">
-                        <a class="page-link" href="booking-list-servlet?page=${pageNumber + 1}">Next</a>
+                        <a class="page-link" href="booking-list-servlet?page=${pageNumber + 1}&status=${selectedStatus}">Next</a>
                     </li>
                 </c:if>
             </ul>

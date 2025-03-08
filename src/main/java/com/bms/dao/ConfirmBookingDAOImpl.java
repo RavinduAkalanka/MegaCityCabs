@@ -9,7 +9,9 @@ import com.bms.config.DatabaseConfig;
 
 public class ConfirmBookingDAOImpl implements ConfirmBookingDAO {
 	private Connection connection = DatabaseConfig.getInstance().getConnection();
+	
 
+	// Update Booking Status
 	@Override
 	public boolean updateBookingStatus(int bookingId, String status, int approvedBy) {
 	    String sql = "UPDATE booking SET bookingStatus = ?, approvedBy = ? WHERE bookingId = ?";
@@ -26,6 +28,8 @@ public class ConfirmBookingDAOImpl implements ConfirmBookingDAO {
 	    return false;
 	}
 
+	
+	// Get All Customer Email By BookingId
 	@Override
     public String getCustomerEmailByBookingId(int bookingId) {
         String sql = "SELECT customerEmail FROM Booking WHERE bookingId = ?";

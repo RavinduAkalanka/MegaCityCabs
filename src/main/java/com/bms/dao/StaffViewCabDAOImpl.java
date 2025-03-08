@@ -54,7 +54,7 @@ public class StaffViewCabDAOImpl implements StaffViewCabDAO {
     }
 	
 	
-	
+	// Get Total Cab Count
 	@Override
     public int getTotalCabCount() {
         String sql = "SELECT COUNT(*) FROM Cab WHERE isAvailable = true"; 

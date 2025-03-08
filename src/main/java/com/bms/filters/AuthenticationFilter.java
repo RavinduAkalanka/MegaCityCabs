@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter("/*") // Apply this filter to all URLs
+@WebFilter("/*") 
 public class AuthenticationFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        // Initialization logic (if needed)
+        
     }
 
     @Override
@@ -69,6 +69,6 @@ public class AuthenticationFilter implements Filter {
     }
     @Override
     public void destroy() {
-        // Cleanup logic (if needed)
+    	
     }
 }

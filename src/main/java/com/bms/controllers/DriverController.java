@@ -63,7 +63,6 @@ public class DriverController {
 	    }
 
 	    
-	    
 	    // Get Total Pages
 	    public int getTotalPages(int pageSize) {
 	        int totalDrivers = driverDAO.getTotalDriverCount();
@@ -75,7 +74,6 @@ public class DriverController {
 	    public DriverDTO getDriverById(int driverId) {
 	        Driver driver = driverDAO.getDriverById(driverId);
 
-	        // Convert the Driver object to a DriverDTO object
 	        if (driver != null) {
 	            return new DriverDTO(
 	                driver.getDriverId(),
