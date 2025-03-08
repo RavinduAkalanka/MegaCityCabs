@@ -98,7 +98,7 @@
                     <li class="nav-item"><a class="nav-link" href="manage-bill-list-servlet">Generate Bill</a></li>
                 <% } else if ("STAFF".equals(role)) { %>
                     <li class="nav-item"><a class="nav-link" href="staff-dashboard-servlet">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Available Cabs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="staff-view-cab-servlet">Available Cabs</a></li>
                     <li class="nav-item"><a class="nav-link" href="booking-list-servlet">Bookings</a></li>
                     <li class="nav-item"><a class="nav-link" href="manage-bill-list-servlet">Generate Bill</a></li>
                 <% } %>
