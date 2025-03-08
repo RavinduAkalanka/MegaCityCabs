@@ -43,23 +43,23 @@ public class BillController {
         return bookingDTOList;
     }
     
+    
+    //Get Total Pages
     public int getTotalPages(int pageSize) {
         int totalBookings = billDAO.getTotalConfirmBookingCount();
         return (int) Math.ceil((double) totalBookings / pageSize);
     }
     
    
-    
+    // Create Bill
     public boolean createBill(BillDTO billDTO) {
-        // Calculate total amount
+  
         double pricePerKm = billDAO.getPricePerKmByCabId(billDTO.getCabId());
         double totalAmount = (billDTO.getTravelDistance() * pricePerKm) + billDTO.getAdditionalCharges() + billDTO.getDriverCharge();
         totalAmount -= (totalAmount * billDTO.getDiscount() / 100); 
 
-        // Set the creation date
         Date createdAt = new Date();
 
-        // Create a Bill object
         Bill bill = new Bill(
             billDTO.getBookingId(),
             billDTO.getCabId(),
@@ -88,6 +88,7 @@ public class BillController {
             return false;
         }
     }
+    
     
     //Get Bill By Id
     public BillDTO getBillById(int billId) {

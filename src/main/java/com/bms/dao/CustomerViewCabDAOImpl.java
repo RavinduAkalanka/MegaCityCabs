@@ -13,7 +13,9 @@ import com.bms.model.Cab;
 
 public class CustomerViewCabDAOImpl implements CustomerViewCabDAO {
 	private Connection connection = DatabaseConfig.getInstance().getConnection();
+	
 
+	// Get All Cabs
 	@Override
     public List<Cab> getAllCabs(int pageNumber, int pageSize) {
         List<Cab> cabList = new ArrayList<>();
@@ -52,6 +54,8 @@ public class CustomerViewCabDAOImpl implements CustomerViewCabDAO {
         return cabList;
     }
 
+	
+	// Get Total Cab Count
 	@Override
     public int getTotalCabCount() {
         String sql = "SELECT COUNT(*) FROM Cab WHERE isAvailable = true"; 
@@ -69,6 +73,8 @@ public class CustomerViewCabDAOImpl implements CustomerViewCabDAO {
         return 0; 
     }
 
+	
+	// Get Limited Cabs
 	@Override
 	public List<Cab> getLimitedCabs(int limit) {
 	    List<Cab> cabList = new ArrayList<>();

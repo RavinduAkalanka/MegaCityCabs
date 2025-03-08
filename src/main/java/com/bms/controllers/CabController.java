@@ -18,13 +18,14 @@ public class CabController {
 	
 	//Add Cabs
 	public boolean addCab(CabDTO cabDTO) {
+		
 	    // Check if vehicleNo already exists
 	    if (cabDAO.isVehicleNoExists(cabDTO.getVehicleNo(), -1)) {
-	        return false; // Vehicle number already exists
+	        return false; 
 	    }
 
 	    Date registrationDate = new Date();
-	    // Convert DTO to Model object
+	    
 	    Cab cab = new Cab(
 	            cabDTO.getModel(),
 	            cabDTO.getVehicleNo(),
@@ -40,8 +41,8 @@ public class CabController {
 	    return cabDAO.addCab(cab);
 	}
 	
-	//Get All Cabs
 	
+	//Get All Cabs
 	public List<CabDTO> getAllCabs(int pageNumber, int pageSize){
     	List<Cab> cabList = cabDAO.getAllCabs(pageNumber, pageSize);
         List<CabDTO> cabDTOList = new ArrayList<>();
@@ -64,6 +65,7 @@ public class CabController {
     	return cabDTOList;
    }
 	
+	
 	//Get Total Page
     public int getTotalPages(int pageSize) {
         int totalCab = cabDAO.getTotalCabCount();
@@ -75,7 +77,6 @@ public class CabController {
     public CabDTO getCabById(int cabId) {
         Cab cab = cabDAO.getCabById(cabId);
 
-        // Convert the Cab object to a CabDTO object
         if (cab != null) {
             return new CabDTO(
                 cab.getCabId(),
@@ -96,7 +97,7 @@ public class CabController {
     
     // Update Cab
     public boolean updateCab(int cabId, CabDTO cabDTO) {
-        // Create a Cab object and populate it with data from the DTO
+
         Cab cab = new Cab();
         cab.setCabId(cabId);
         cab.setModel(cabDTO.getModel());
@@ -109,11 +110,10 @@ public class CabController {
         cab.setCabImgUrl(cabDTO.getCabImgUrl());
         cab.setDescription(cabDTO.getDescription());
 
-        // Call the DAO to update the cab
         return cabDAO.updateCab(cab);
     }
     
-    //Delete Cab
+    // Delete Cab
     public boolean deleteCab(int cabId) {
         return cabDAO.deleteCab(cabId);
     }

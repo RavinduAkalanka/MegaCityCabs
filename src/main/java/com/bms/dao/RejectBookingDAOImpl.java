@@ -10,6 +10,8 @@ import com.bms.config.DatabaseConfig;
 public class RejectBookingDAOImpl implements RejectBookingDAO {
 	private Connection connection = DatabaseConfig.getInstance().getConnection();
 
+
+	// Get CabId By Booking ID
 	@Override
     public int getCabIdByBookingId(int bookingId) {
         String sql = "SELECT cabId FROM Booking WHERE bookingId = ?";
@@ -26,6 +28,8 @@ public class RejectBookingDAOImpl implements RejectBookingDAO {
         return -1;
     }
 
+	
+	// Get Driver Id By Booking Id
     @Override
     public Integer getDriverIdByBookingId(int bookingId) {
         String sql = "SELECT driverId FROM Booking WHERE bookingId = ?";
@@ -42,6 +46,8 @@ public class RejectBookingDAOImpl implements RejectBookingDAO {
         return null; 
     }
 
+    
+    // Update Cab Availability
     @Override
     public void updateCabAvailability(int cabId, boolean isAvailable) {
         String sql = "UPDATE Cab SET isAvailable = ? WHERE cabId = ?";
@@ -54,6 +60,8 @@ public class RejectBookingDAOImpl implements RejectBookingDAO {
         }
     }
 
+    
+    // Update Driver Availability
     @Override
     public void updateDriverAvailability(int driverId, boolean isAvailable) {
         String sql = "UPDATE Driver SET isAvailable = ? WHERE driverId = ?";
@@ -67,6 +75,7 @@ public class RejectBookingDAOImpl implements RejectBookingDAO {
     }
     
 
+    // Update Booking Status
     @Override
     public boolean updateBookingStatus(int bookingId, String status, int rejectedBy) {
         String sql = "UPDATE Booking SET bookingStatus = ?, rejectBy = ? WHERE bookingId = ?";
@@ -84,6 +93,7 @@ public class RejectBookingDAOImpl implements RejectBookingDAO {
     }
     
 
+    // Get Customer Email By Booking Id
     @Override
     public String getCustomerEmailByBookingId(int bookingId) {
         String sql = "SELECT customerEmail FROM Booking WHERE bookingId = ?";

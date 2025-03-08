@@ -59,7 +59,6 @@
             padding-bottom: 10px;
         }
 
-        /* Key Metrics Cards */
         .cards-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -102,7 +101,6 @@
             color: #777;
         }
 
-        /* Recent Bookings Section */
         .details-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -178,7 +176,7 @@
         <div class="cards-container">
             <div class="card">
                 <h2>Total Earnings (Last 7 Days)</h2>
-               <p>Rs. <fmt:formatNumber value="${totalEarning}"  type="number" minFractionDigits="2" /></p>
+                <p>Rs. <fmt:formatNumber value="${totalEarning}"  type="number" minFractionDigits="2" /></p>
                 <small>Earned from all completed bookings.</small>
             </div>
             <div class="card">
@@ -219,15 +217,37 @@
                 <h2>Recent Bookings</h2>
                 <ul>
                     <c:forEach var="booking" items="${bookingList}">
-                      <li>
-                        Booking : ${booking.bookingId} 
-                        <span class="customer-name" style="color: black;">${booking.customerName}</span> 
-                        <span class="status" 
-                            style="color: ${booking.bookingStatus == 'PENDING' ? '#FFBF00' : booking.bookingStatus == 'CONFIRMED' ? '#007bff' : '#28a745'};">
-                            ${booking.bookingStatus}
-                        </span>
+                        <c:set var="statusColor" value="#000000"/> 
+
+                        <c:choose>
+                            <c:when test="${booking.bookingStatus eq 'PENDING'}">
+                                <c:set var="statusColor" value="#FFBF00"/> 
+                            </c:when>
+                            <c:when test="${booking.bookingStatus eq 'COMPLETED'}">
+                                <c:set var="statusColor" value="#007BFF"/> 
+                            </c:when>
+                            <c:when test="${booking.bookingStatus eq 'CONFIRMED'}">
+                                <c:set var="statusColor" value="#28A745"/> 
+                            </c:when>
+                            <c:when test="${booking.bookingStatus eq 'REJECTED'}">
+                                <c:set var="statusColor" value="#FF0000"/>
+                            </c:when>
+                        </c:choose>
+
+                        <li>
+                            Booking: ${booking.bookingId} 
+                            <span class="customer-name" style="color: black;">${booking.customerName}</span> 
+                            <span class="status" style="color: ${statusColor}; font-weight: bold;">
+                                <c:choose>
+                                    <c:when test="${booking.bookingStatus eq 'PENDING'}">Pending</c:when>
+                                    <c:when test="${booking.bookingStatus eq 'COMPLETED'}">Completed</c:when>
+                                    <c:when test="${booking.bookingStatus eq 'CONFIRMED'}">Confirmed</c:when>
+                                    <c:when test="${booking.bookingStatus eq 'REJECTED'}">Rejected</c:when>
+                                    <c:otherwise>Unknown</c:otherwise>
+                                </c:choose>
+                            </span>
                         </li>
-                     </c:forEach>
+                    </c:forEach>
                 </ul>
             </div>
         </div>

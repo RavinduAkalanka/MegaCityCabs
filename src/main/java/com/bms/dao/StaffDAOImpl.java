@@ -25,13 +25,13 @@ public class StaffDAOImpl implements StaffDAO {
             pst.setInt(2, userId);
             try (ResultSet rs = pst.executeQuery()) {
             	if (rs.next()) {
-                    return rs.getInt(1) > 0;  // If the email exists for another user, return true
+                    return rs.getInt(1) > 0;  
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false; // No duplicate email found
+        return false; 
     }
     
 
@@ -56,7 +56,7 @@ public class StaffDAOImpl implements StaffDAO {
     }
     
 
-    // Get All Staff with Pagination
+    // Get All Staff 
     @Override
     public List<Staff> getAllStaff(int pageNumber, int pageSize) {
         List<Staff> staffList = new ArrayList<>();
@@ -64,9 +64,9 @@ public class StaffDAOImpl implements StaffDAO {
                      "WHERE role = 'STAFF' ORDER BY userId DESC LIMIT ?, ?";
 
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
-            // Set parameters for pagination
-            pst.setInt(1, (pageNumber - 1) * pageSize); // Offset
-            pst.setInt(2, pageSize); // Limit
+           
+            pst.setInt(1, (pageNumber - 1) * pageSize); 
+            pst.setInt(2, pageSize); 
 
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
@@ -150,6 +150,7 @@ public class StaffDAOImpl implements StaffDAO {
 	}
 
 
+	// Delete Staff
 	@Override
 	public boolean deleteStaff(int userId) {
 		String sql = "DELETE FROM User WHERE userId = ? AND role = 'STAFF'";

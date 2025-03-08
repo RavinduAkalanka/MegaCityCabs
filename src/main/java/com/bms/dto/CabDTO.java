@@ -9,16 +9,16 @@ public class CabDTO {
     private String owner;
     private String fuelType;
     private double pricePerKM;
-    private boolean isAvailable; // Renamed to match database column
+    private boolean isAvailable; 
     private int capacity;
     private Date registrationDate;
     private String cabImgUrl;
     private String description;
 
-    // Default constructor
+   
     public CabDTO() {}
 
-    // Parameterized constructor with all fields
+    
     public CabDTO(int cabId, String model, String vehicleNo, String owner, String fuelType, double pricePerKM, boolean isAvailable, int capacity, Date registrationDate,
                   String cabImgUrl, String description) {
         this.cabId = cabId;
@@ -27,14 +27,14 @@ public class CabDTO {
         this.owner = owner;
         this.fuelType = fuelType;
         this.pricePerKM = pricePerKM;
-        this.isAvailable = isAvailable; // Updated field name
+        this.isAvailable = isAvailable; 
         this.capacity = capacity;
         this.registrationDate = registrationDate;
         this.cabImgUrl = cabImgUrl;
         this.description = description;
     }
 
-    // Parameterized constructor without cabId (for adding new cabs)
+    
     public CabDTO(String model, String vehicleNo, String owner, String fuelType, double pricePerKM, boolean isAvailable, int capacity, Date registrationDate,
                   String cabImgUrl, String description) {
         this.model = model;
@@ -50,7 +50,6 @@ public class CabDTO {
     }
     
 
-    // Getters and Setters
     public int getCabId() {
         return cabId;
     }

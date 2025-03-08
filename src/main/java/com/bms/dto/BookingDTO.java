@@ -84,7 +84,6 @@ public class BookingDTO {
         this.createdAt = createdAt;
     }
 
-    // New constructor with additional fields
     public BookingDTO(
             int bookingId,
             String customerName,
@@ -116,18 +115,17 @@ public class BookingDTO {
         this.bookingTo = bookingTo;
         this.pickupLocation = pickupLocation;
         this.cabId = cabId;
-        this.cabModel = cabModel; // Initialize new field
+        this.cabModel = cabModel; 
         this.driverId = driverId;
-        this.driverName = driverName; // Initialize new field
+        this.driverName = driverName; 
         this.bookingStatus = bookingStatus;
         this.approvedBy = approvedBy;
-        this.approvedByName = approvedByName; // Initialize new field
+        this.approvedByName = approvedByName; 
         this.rejectedBy = rejectedBy;
-        this.rejectedByName = rejectedByName; // Initialize new field
+        this.rejectedByName = rejectedByName; 
         this.createdAt = createdAt;
     }
 
-    // Getters and Setters for existing fields
     public int getBookingId() {
         return bookingId;
     }

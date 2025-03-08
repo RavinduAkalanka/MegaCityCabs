@@ -16,7 +16,10 @@ import com.bms.model.Booking;
 
 public class BillDAOImpl implements BillDAO {
 	private Connection connection = DatabaseConfig.getInstance().getConnection();
+	
+	
 
+	// Get All Confirm Booking
 	@Override
 	public List<Booking> getAllConfirmBookings(int pageNumber, int pageSize) {
 	    List<Booking> bookingList = new ArrayList<>();
@@ -57,8 +60,9 @@ public class BillDAOImpl implements BillDAO {
 	    }
 	    return bookingList;
 	}
+	
 
-	//Get Total Confirm Booking Count
+	// Get Total Confirm Booking Count
 	@Override
 	public int getTotalConfirmBookingCount() {
 	    String sql = "SELECT COUNT(*) FROM Booking WHERE bookingStatus = ?";
@@ -76,6 +80,8 @@ public class BillDAOImpl implements BillDAO {
 	    return 0; 
 	}
 
+	
+	// Create Bill
 	@Override
 	public int createBill(Bill bill) {
 	    String sql = "INSERT INTO Bill (bookingId, cabId, driverId, travelDistance, additionalCharges, driverCharges, discount, paymentMethod, totalAmount, createdAt, createdBy) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -110,8 +116,7 @@ public class BillDAOImpl implements BillDAO {
 	}
 
 
-	
-	//Get Price Per KM by CabId
+	// Get Price Per KM by CabId
 	public double getPricePerKmByCabId(int cabId) {
         String sql = "SELECT pricePerKm FROM Cab WHERE cabId = ?";
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
@@ -127,7 +132,7 @@ public class BillDAOImpl implements BillDAO {
     }
 
 	
-	//Update Cab Availability
+	// Update Cab Availability
 	public boolean updateCabAvailability(int cabId, boolean isAvailable) {
         String sql = "UPDATE Cab SET isAvailable = ? WHERE cabId = ?";
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
@@ -142,7 +147,7 @@ public class BillDAOImpl implements BillDAO {
     }
 
 	
-	//Update Driver Availability
+	// Update Driver Availability
 	public boolean updateDriverAvailability(int driverId, boolean isAvailable) {
         String sql = "UPDATE Driver SET isAvailable = ? WHERE driverId = ?";
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
@@ -157,7 +162,7 @@ public class BillDAOImpl implements BillDAO {
     }
 
 	
-	//Update Booking Status
+	// Update Booking Status
 	public boolean updateBookingStatus(int bookingId, String status) {
         String sql = "UPDATE Booking SET bookingStatus = ? WHERE bookingId = ?";
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
@@ -171,6 +176,8 @@ public class BillDAOImpl implements BillDAO {
         }
     }
 
+	
+	// Get Bill By Id
 	@Override
 	public Bill getBillById(int billId) {
 	    Bill bill = null;

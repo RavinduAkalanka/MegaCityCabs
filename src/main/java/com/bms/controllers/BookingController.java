@@ -21,7 +21,7 @@ public class BookingController {
 	public CabDTO getCabById(int cabId) {
         Cab cab = bookingDAO.getCabById(cabId);
 
-        // Convert the Cab object to a CabDTO object
+        
         if (cab != null) {
             return new CabDTO(
                 cab.getCabId(),
@@ -40,7 +40,8 @@ public class BookingController {
         return null; 
     }
 	
-	//Add Booking 
+	
+	// Add Booking 
 	public boolean addBooking(BookingDTO bookingDTO) {
 		
 		Date createDate = new Date();
@@ -65,44 +66,45 @@ public class BookingController {
 	}
 	
 	
-	//Get All Booking
-	public List<BookingDTO> getAllBookings(int pageNumber, int pageSize) {
-	    List<Booking> bookingList = bookingDAO.getAllBookings(pageNumber, pageSize);
+	// Get All Booking
+	public List<BookingDTO> getAllBookings(int pageNumber, int pageSize, String status) {
+	    List<Booking> bookingList = bookingDAO.getAllBookings(pageNumber, pageSize, status);
 
 	    List<BookingDTO> bookingDTOList = new ArrayList<>();
 	    for (Booking booking : bookingList) {
 	        bookingDTOList.add(new BookingDTO(
-	        		booking.getBookingId(),          
-	        	    booking.getCustomerName(),       
-	        	    booking.getNationalId(),         
-	        	    booking.getCustomerEmail(),      
-	        	    booking.getCustomerContactNo(),  
-	        	    booking.getAddress(),  
-	        	    booking.getBookingFrom(),       
-	        	    booking.getBookingTo(),          
-	        	    booking.getPickupLocation(),    
-	        	    booking.getCabId(),              
-	        	    booking.getDriverId(),           
-	        	    booking.getBookingStatus(),     
-	        	    booking.getApprovedBy(),         
-	        	    booking.getRejectedBy(),         
-	        	    booking.getCreatedAt()          		
+	                booking.getBookingId(),          
+	                booking.getCustomerName(),       
+	                booking.getNationalId(),         
+	                booking.getCustomerEmail(),      
+	                booking.getCustomerContactNo(),  
+	                booking.getAddress(),  
+	                booking.getBookingFrom(),       
+	                booking.getBookingTo(),          
+	                booking.getPickupLocation(),    
+	                booking.getCabId(),              
+	                booking.getDriverId(),           
+	                booking.getBookingStatus(),     
+	                booking.getApprovedBy(),         
+	                booking.getRejectedBy(),         
+	                booking.getCreatedAt()          
 	        ));
 	    }
 
 	    return bookingDTOList;
 	}
-     
 
-    // Get total number of pages for pagination
+
+    // Get Total Pages
     public int getTotalPages(int pageSize) {
         int totalBookings = bookingDAO.getTotalBookingCount();
         return (int) Math.ceil((double) totalBookings / pageSize);
     }
     
     
+    // Get Booking By Id
     public BookingDTO getBookingById(int bookingId) {
-        // Fetch the Booking entity from the DAO
+
         Booking booking = bookingDAO.getBookingById(bookingId);
 
         if (booking != null) {

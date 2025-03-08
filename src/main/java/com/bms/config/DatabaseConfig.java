@@ -13,7 +13,6 @@ public class DatabaseConfig {
 
     private DatabaseConfig() {
         try {
-            // Load properties from db.properties file (from the classpath)
             Properties properties = new Properties();
             InputStream inputStream = getClass().getClassLoader().getResourceAsStream("db.properties");
 

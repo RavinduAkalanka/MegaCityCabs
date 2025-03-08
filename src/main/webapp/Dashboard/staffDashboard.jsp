@@ -174,33 +174,27 @@
         <!-- Title -->
         <h1>Staff Dashboard</h1>
 
-        <!-- Key Metrics Cards -->
         <div class="cards-container">
-            <!-- Pending Bookings Card -->
             <div class="card">
                 <h2>Pending Bookings</h2>
                 <p>${pendingBookings}</p>
                 <small>Bookings awaiting confirmation</small>
             </div>
-            <!-- Confirmed Bookings Card -->
             <div class="card">
                 <h2>Confirmed Bookings</h2>
                 <p>${confirmedBookings}</p>
                 <small>Bookings ready for dispatch</small>
             </div>
-            <!-- Completed Bookings Card -->
             <div class="card">
                 <h2>Completed Bookings</h2>
                 <p>${completedBookings}</p>
                 <small>Bookings that have been completed</small>
             </div>
-            <!-- Total Cabs Card -->
             <div class="card">
                 <h2>Total Cabs</h2>
                 <p>${totalCabs}</p>
                 <small>Total number of available cabs</small>
             </div>
-            <!-- Total Drivers Card -->
             <div class="card">
                 <h2>Total Drivers</h2>
                 <p>${totalDrivers}</p>
@@ -214,12 +208,34 @@
                 <h2>Recent Bookings</h2>
                 <ul>
                     <c:forEach var="booking" items="${bookingList}">
+                        <c:set var="statusColor" value="#000000"/> 
+
+                        <c:choose>
+                            <c:when test="${booking.bookingStatus eq 'PENDING'}">
+                                <c:set var="statusColor" value="#FFBF00"/> 
+                            </c:when>
+                            <c:when test="${booking.bookingStatus eq 'COMPLETED'}">
+                                <c:set var="statusColor" value="#007BFF"/> 
+                            </c:when>
+                            <c:when test="${booking.bookingStatus eq 'CONFIRMED'}">
+                                <c:set var="statusColor" value="#28A745"/> 
+                            </c:when>
+                            <c:when test="${booking.bookingStatus eq 'REJECTED'}">
+                                <c:set var="statusColor" value="#FF0000"/> 
+                            </c:when>
+                        </c:choose>
+
                         <li>
                             Booking: ${booking.bookingId} 
                             <span class="customer-name" style="color: black;">${booking.customerName}</span> 
-                            <span class="status" 
-                                style="color: ${booking.bookingStatus == 'PENDING' ? '#FFBF00' : booking.bookingStatus == 'CONFIRMED' ? '#007bff' : '#28a745'};">
-                                ${booking.bookingStatus}
+                            <span class="status" style="color: ${statusColor}; font-weight: bold;">
+                                <c:choose>
+                                    <c:when test="${booking.bookingStatus eq 'PENDING'}">Pending</c:when>
+                                    <c:when test="${booking.bookingStatus eq 'COMPLETED'}">Completed</c:when>
+                                    <c:when test="${booking.bookingStatus eq 'CONFIRMED'}">Confirmed</c:when>
+                                    <c:when test="${booking.bookingStatus eq 'REJECTED'}">Rejected</c:when>
+                                    <c:otherwise>Unknown</c:otherwise>
+                                </c:choose>
                             </span>
                         </li>
                     </c:forEach>

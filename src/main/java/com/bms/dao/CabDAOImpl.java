@@ -24,13 +24,13 @@ public class CabDAOImpl implements CabDAO {
             pst.setInt(2, cabId);
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getInt(1) > 0; // If the vehicleNo exists for another cab, return true
+                    return rs.getInt(1) > 0; 
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false; // No duplicate vehicleNo found
+        return false; 
     }
 	
 	
@@ -143,6 +143,7 @@ public class CabDAOImpl implements CabDAO {
     }
 
 
+	// Update Cab
 	@Override
 	public boolean updateCab(Cab cab) {
 		// Check if the vehicleNo already exists for another cab
