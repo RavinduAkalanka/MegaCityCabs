@@ -34,11 +34,12 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("user", userDTO);
                 session.setAttribute("role", userDTO.getRole().toString().toUpperCase());
                 session.setAttribute("userId", userDTO.getUserId());
+                session.setAttribute("name", userDTO.getName());
 
                 if (Role.ADMIN.equals(userDTO.getRole())) {
-                    response.sendRedirect(request.getContextPath() + "/adminDashboard.jsp");
+                	response.sendRedirect(request.getContextPath() + "/admin-dashboard-servlet");
                 } else if (Role.STAFF.equals(userDTO.getRole())) {
-                    response.sendRedirect(request.getContextPath() + "/staffDashboard.jsp");
+                    response.sendRedirect(request.getContextPath() + "/staff-dashboard-servlet");
                 }
             } else {
                 request.setAttribute("errorMessage", "Invalid credentials");

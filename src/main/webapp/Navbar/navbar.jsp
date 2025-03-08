@@ -74,7 +74,7 @@
 <%
     String role = (String) session.getAttribute("role");
     if (role == null) {
-        role = ""; // Default to empty if no role is found
+        role = ""; 
     }
 %>
 
@@ -90,14 +90,14 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mx-auto"> <!-- Centers items -->
                 <% if ("ADMIN".equals(role)) { %>
-                    <li class="nav-item"><a class="nav-link" href="./adminDashboard.jsp">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin-dashboard-servlet">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="cab-servlet">Manage Cabs</a></li>
                     <li class="nav-item"><a class="nav-link" href="driver-servlet">Manage Drivers</a></li>
                     <li class="nav-item"><a class="nav-link" href="staff-servlet">Manage Staff</a></li>
                     <li class="nav-item"><a class="nav-link" href="booking-list-servlet">Manage Bookings</a></li>
                     <li class="nav-item"><a class="nav-link" href="manage-bill-list-servlet">Generate Bill</a></li>
                 <% } else if ("STAFF".equals(role)) { %>
-                    <li class="nav-item"><a class="nav-link" href="./staffDashboard.jsp">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="staff-dashboard-servlet">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Available Cabs</a></li>
                     <li class="nav-item"><a class="nav-link" href="booking-list-servlet">Bookings</a></li>
                     <li class="nav-item"><a class="nav-link" href="manage-bill-list-servlet">Generate Bill</a></li>
