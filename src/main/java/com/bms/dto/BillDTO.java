@@ -19,21 +19,21 @@ public class BillDTO {
 
 	public BillDTO() {}
 
-    public BillDTO(int billId,int bookingId, int cabId, int driverId, double travelDistance, double additionalCharges, 
-                   double driverCharge, double discount, PaymentMethod paymentMethod, double totalAmount, 
-                   Date createdAt, int createdBy) {
-    	this.billId = billId;
-        this.bookingId = bookingId;
-        this.cabId = cabId;
-        this.driverId = driverId; 
-        this.travelDistance = travelDistance;
-        this.additionalCharges = additionalCharges;
-        this.driverCharge = driverCharge;
-        this.discount = discount;
-        this.paymentMethod = paymentMethod;
-        this.totalAmount = totalAmount;
-        this.createdAt = createdAt;
-        this.createdBy = createdBy;
+	public BillDTO(int billId, int bookingId, int cabId, int driverId, double travelDistance, 
+            double additionalCharges, double driverCharge, double discount, 
+            PaymentMethod paymentMethod, double totalAmount, Date createdAt, int createdBy) {
+       this.billId = billId;
+       this.bookingId = bookingId;
+       this.cabId = cabId;
+       this.driverId = driverId;
+       this.travelDistance = travelDistance;
+       this.additionalCharges = additionalCharges;
+       this.driverCharge = driverCharge;
+       this.discount = discount;
+       this.paymentMethod = paymentMethod;
+       this.totalAmount = totalAmount;
+       this.createdAt = createdAt;
+       this.createdBy = createdBy;
     }
 
     public BillDTO(int bookingId, int cabId, int driverId, double travelDistance, double additionalCharges, 

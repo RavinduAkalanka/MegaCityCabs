@@ -17,8 +17,7 @@ public class CabController {
 	private CabDAO cabDAO = new CabDAOImpl();
 	
 	//Add Cabs
-	public boolean addCab(CabDTO cabDTO) {
-		
+	public boolean addCab(CabDTO cabDTO) {	
 	    // Check if vehicleNo already exists
 	    if (cabDAO.isVehicleNoExists(cabDTO.getVehicleNo(), -1)) {
 	        return false; 

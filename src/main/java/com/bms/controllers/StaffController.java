@@ -85,10 +85,13 @@ public class StaffController {
     
     
     // Update Staff
-    public boolean updateStaff(int userId,StaffDTO staffDTO) {
+    public boolean updateStaff(int userId, StaffDTO staffDTO) {
+        if (staffDAO.isEmailExists(staffDTO.getEmail(), userId)) {
+            return false; 
+        }
 
         Staff staff = new Staff();
-        staff.setUserId(userId); 
+        staff.setUserId(userId);
         staff.setName(staffDTO.getName());
         staff.setEmail(staffDTO.getEmail());
         staff.setContactNo(staffDTO.getContactNo());

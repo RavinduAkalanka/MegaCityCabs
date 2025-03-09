@@ -30,6 +30,20 @@ public class Cab {
         this.cabImgUrl = cabImgUrl;
         this.description = description;
     }
+    
+    public Cab(int cabId,String model, String vehicleNo, String owner, String fuelType, double pricePerKM, boolean isAvailable, int capacity, Date registrationDate, String cabImgUrl, String description) {
+    	this.cabId = cabId; 
+        this.model = model;
+        this.vehicleNo = vehicleNo;
+        this.owner = owner;
+        this.fuelType = fuelType;
+        this.pricePerKM = pricePerKM;
+        this.isAvailable = isAvailable; 
+        this.capacity = capacity;
+        this.registrationDate = registrationDate;
+        this.cabImgUrl = cabImgUrl;
+        this.description = description;
+    }
 
     
     public int getCabId() {

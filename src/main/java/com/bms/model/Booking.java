@@ -44,7 +44,27 @@ public class Booking {
         this.rejectedBy = rejectedBy;
         this.createdAt = createdAt;
     }
-
+    
+    public Booking(int bookingId, String customerName, String nationalId, String customerEmail, 
+            String customerContactNo, String address, Date bookingFrom, Date bookingTo, 
+            String pickupLocation, Integer cabId, Integer driverId, BookingStatus bookingStatus, 
+            Integer approvedBy, Integer rejectedBy, Date createdAt) {
+       this.bookingId = bookingId;
+       this.customerName = customerName;
+       this.nationalId = nationalId;
+       this.customerEmail = customerEmail;
+       this.customerContactNo = customerContactNo;
+       this.address = address;
+       this.bookingFrom = bookingFrom;
+       this.bookingTo = bookingTo;
+       this.pickupLocation = pickupLocation;
+       this.cabId = cabId;
+       this.driverId = driverId;
+       this.bookingStatus = bookingStatus;
+       this.approvedBy = approvedBy;
+       this.rejectedBy = rejectedBy;
+       this.createdAt = createdAt;
+    }
 
 	public int getBookingId() {
 		return bookingId;
