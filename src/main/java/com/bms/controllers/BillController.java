@@ -93,26 +93,26 @@ public class BillController {
     //Get Bill By Id
     public BillDTO getBillById(int billId) {
         Bill bill = billDAO.getBillById(billId);
-
+        
         if (bill != null) {
             BillDTO billDTO = new BillDTO(
-            	bill.getBillId(),
-                bill.getBookingId(),
-                bill.getCabId(),
-                bill.getDriverId(),
-                bill.getTravelDistance(),
-                bill.getAdditionalCharges(),
-                bill.getDriverCharge(),
-                bill.getDiscount(),
-                bill.getPaymentMethod(),
-                bill.getTotalAmount(),
-                bill.getCreatedAt(),
+                bill.getBillId(), 
+                bill.getBookingId(), 
+                bill.getCabId(), 
+                bill.getDriverId(), 
+                bill.getTravelDistance(), 
+                bill.getAdditionalCharges(), 
+                bill.getDriverCharge(), 
+                bill.getDiscount(), 
+                bill.getPaymentMethod(), 
+                bill.getTotalAmount(), 
+                bill.getCreatedAt(), 
                 bill.getCreatedBy()
             );
             return billDTO;
-        } else {
-            return null;
         }
+        return null;
     }
+   
 
 }

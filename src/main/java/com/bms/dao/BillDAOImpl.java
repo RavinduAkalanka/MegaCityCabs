@@ -201,7 +201,8 @@ public class BillDAOImpl implements BillDAO {
 	            bill.setTotalAmount(rs.getDouble("totalAmount"));
 	            bill.setCreatedAt(rs.getTimestamp("createdAt"));
 	            bill.setCreatedBy(rs.getInt("createdBy"));
-	        } 
+	            
+	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }

@@ -23,6 +23,15 @@ public class Staff {
         this.role = role;
         this.createDate = createDate;
     }
+    
+    public Staff(int userId, String name, String email, String contactNo, Role role, Date createDate) {
+        this.userId = userId;
+        this.name = name;
+        this.email = email;
+        this.contactNo = contactNo;
+        this.role = role;
+        this.createDate = createDate;
+    }
 
 	public int getUserId() {
 		return userId;

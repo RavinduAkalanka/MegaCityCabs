@@ -23,6 +23,17 @@ public class Driver {
 		this.isAvailable = isAvailable;
 		this.registerDate = registerDate;
 	}
+	
+	public Driver(int driverId, String driverName, String email, String contactNo, String licenseNo, String address, boolean isAvailable, Date registerDate) {
+		this.driverId = driverId;
+		this.driverName = driverName;
+		this.email = email;
+		this.contactNo = contactNo;
+		this.licenseNo = licenseNo;
+		this.address = address;
+		this.isAvailable = isAvailable;
+		this.registerDate = registerDate;
+	}
 
 
 	public int getDriverId() {
