@@ -13,4 +13,5 @@ public interface DriverDAO {
     Driver getDriverById(int driverId);
     boolean updateDriver(Driver driver);
     boolean deleteDriver(int driverId);
+    List<Driver> searchDriverByName(String driverName);
 }

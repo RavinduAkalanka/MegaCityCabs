@@ -13,4 +13,5 @@ public interface CabDAO {
 	Cab getCabById(int userId);
 	boolean updateCab(Cab cab);
 	boolean deleteCab(int cabId);
+	List<Cab> searchCabByModel(String model);
 }

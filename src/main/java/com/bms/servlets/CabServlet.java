@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,32 +27,39 @@ public class CabServlet extends HttpServlet {
     }
 
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		    int pageSize = 7; 
-	        int pageNumber = 1; 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	        // Get the page number from the request parameter
-	        String pageParam = request.getParameter("page");
-	        if (pageParam != null) {
-	            try {
-	                pageNumber = Integer.parseInt(pageParam);
-	            } catch (NumberFormatException e) {
-	                pageNumber = 1; // Fallback to page 1 if the parameter is invalid
-	            }
-	        }
+        int pageSize = 7;
+        int pageNumber = 1;
 
-	        List<CabDTO> cabList = cabController.getAllCabs(pageNumber, pageSize);
-	        
-	        int totalPages = cabController.getTotalPages(pageSize);
+        String pageParam = request.getParameter("page");
+        if (pageParam != null) {
+            try {
+                pageNumber = Integer.parseInt(pageParam);
+            } catch (NumberFormatException e) {
+                pageNumber = 1;
+            }
+        }
 
-	        request.setAttribute("cabList", cabList);
-	        request.setAttribute("pageNumber", pageNumber);
-	        request.setAttribute("totalPages", totalPages);
+        String searchModel = request.getParameter("searchModel");
+        List<CabDTO> cabList;
 
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("/Cab/cab.jsp");
-	        dispatcher.forward(request, response);
-	}
+        if (searchModel != null && !searchModel.isEmpty()) {
+            cabList = cabController.searchCabByModel(searchModel);
+        } else {
+            cabList = cabController.getAllCabs(pageNumber, pageSize);
+        }
+
+        int totalPages = cabController.getTotalPages(pageSize);
+
+        request.setAttribute("cabList", cabList);
+        request.setAttribute("pageNumber", pageNumber);
+        request.setAttribute("totalPages", totalPages);
+        request.setAttribute("searchModel", searchModel); 
+
+        request.getRequestDispatcher("/Cab/cab.jsp").forward(request, response);
+    }
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

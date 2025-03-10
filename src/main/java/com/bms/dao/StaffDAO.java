@@ -12,4 +12,5 @@ public interface StaffDAO {
 	boolean deleteStaff(int userId);
 	boolean isEmailExists(String email, int userId);  
     int getTotalStaffCount();
+    List<Staff> searchStaffByName(String name);
 }

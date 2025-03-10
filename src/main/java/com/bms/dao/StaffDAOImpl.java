@@ -166,4 +166,31 @@ public class StaffDAOImpl implements StaffDAO {
 		}
 		
 	}
+
+
+	// Search Cab by Staff Name
+	@Override
+    public List<Staff> searchStaffByName(String name) {
+        List<Staff> staffList = new ArrayList<>();
+        String query = "SELECT * FROM User WHERE name LIKE ? AND role = 'STAFF'";
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, "%" + name + "%"); 
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Staff staff = new Staff();
+                staff.setUserId(rs.getInt("userId"));
+                staff.setName(rs.getString("name"));
+                staff.setEmail(rs.getString("email"));
+                staff.setContactNo(rs.getString("contactNo"));
+                staff.setCreateDate(new Date(rs.getTimestamp("createDate").getTime()));
+                staffList.add(staff);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return staffList;
+    }
+
 }
