@@ -104,5 +104,23 @@ public class StaffController {
     public boolean deleteStaff(int userId) {
         return staffDAO.deleteStaff(userId);
     }
+    
+    // Search Staff by Name
+    public List<StaffDTO> searchStaffByName(String name) {
+        List<Staff> staffList = staffDAO.searchStaffByName(name);
+        List<StaffDTO> staffDTOList = new ArrayList<>();
+
+        for (Staff staff : staffList) {
+            staffDTOList.add(new StaffDTO(
+                staff.getUserId(),
+                staff.getName(),
+                staff.getEmail(),
+                staff.getContactNo(),
+                null, 
+                staff.getCreateDate()
+            ));
+        }
+        return staffDTOList;
+    }
      
 }

@@ -157,4 +157,25 @@ public class StaffControllerTest {
         assertFalse(result);
         verify(staffDAO, times(1)).deleteStaff(userId);
     }
+    
+    @Test
+    public void testSearchStaffByName() {
+        // Arrange
+        String searchName = "John";
+        List<Staff> staffList = new ArrayList<>();
+        staffList.add(new Staff(1, "John Doe", "john@example.com", "123456789", Role.STAFF, new Date()));
+        staffList.add(new Staff(2, "Johnny Smith", "johnny@example.com", "987654321", Role.STAFF, new Date()));
+
+        when(staffDAO.searchStaffByName(searchName)).thenReturn(staffList);
+
+        // Act
+        List<StaffDTO> result = staffController.searchStaffByName(searchName);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals("John Doe", result.get(0).getName());
+        assertEquals("Johnny Smith", result.get(1).getName());
+        verify(staffDAO, times(1)).searchStaffByName(searchName);
+    }
 }

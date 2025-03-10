@@ -203,4 +203,34 @@ public class DriverDAOImpl implements DriverDAO {
 	 }
 
 
+	// Search Cab by Driver Name
+	 @Override
+	    public List<Driver> searchDriverByName(String driverName) {
+	        List<Driver> driverList = new ArrayList<>();
+	        String query = "SELECT * FROM driver WHERE driverName LIKE ?"; 
+
+	        try (PreparedStatement ps = connection.prepareStatement(query)) {
+	            ps.setString(1, "%" + driverName + "%"); 
+	            ResultSet rs = ps.executeQuery();
+
+	            while (rs.next()) {
+	                Driver driver = new Driver();
+	                driver.setDriverId(rs.getInt("driverId"));
+                    driver.setDriverName(rs.getString("driverName"));
+                    driver.setEmail(rs.getString("email"));
+                    driver.setContactNo(rs.getString("contactNo"));
+                    driver.setLicenseNo(rs.getString("licenseNo"));
+                    driver.setAddress(rs.getString("address"));
+                    driver.setAvailable(rs.getBoolean("isAvailable"));
+                    driver.setRegisterDate(new java.util.Date(rs.getTimestamp("registerDate").getTime()));
+	                driverList.add(driver);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return driverList;
+	    }
+
+
+
 }

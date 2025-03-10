@@ -190,4 +190,37 @@ public class CabDAOImpl implements CabDAO {
 	    }
 	}
 
+
+	// Search Cab by Model
+	@Override
+    public List<Cab> searchCabByModel(String model) {
+        List<Cab> cabList = new ArrayList<>();
+        String query = "SELECT * FROM cab WHERE model LIKE ?"; 
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, "%" + model + "%"); 
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Cab cab = new Cab();
+                cab.setCabId(rs.getInt("cabId"));
+                cab.setModel(rs.getString("model"));
+                cab.setVehicleNo(rs.getString("vehicleNo"));
+                cab.setOwner(rs.getString("owner"));
+                cab.setFuelType(rs.getString("fuelType"));
+                cab.setPricePerKM(rs.getDouble("pricePerKM"));
+                cab.setAvailable(rs.getBoolean("isAvailable"));
+                cab.setCapacity(rs.getInt("capacity"));
+                cab.setRegistrationDate(new Date(rs.getTimestamp("registrationDate").getTime()));
+                cab.setCabImgUrl(rs.getString("cabImgUrl"));
+                cab.setDescription(rs.getString("description"));
+                cabList.add(cab);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cabList;
+    }
+
+
 }

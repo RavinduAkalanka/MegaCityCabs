@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,36 +25,39 @@ public class StaffServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	
-    	
+
         int pageSize = 7;
         int pageNumber = 1;
-    		
-    	String pageParam = request.getParameter("page");
-    	if (pageParam != null) {
-               try {
-                   pageNumber = Integer.parseInt(pageParam);
-               } catch (NumberFormatException e) {
-                   pageNumber = 1;
-               }
-           }
-    	
-    	// Get staff list from the controller
-        List<StaffDTO> staffList = staffController.getAllStaff(pageNumber, pageSize);
-        
-        // Get total pages
+
+        String pageParam = request.getParameter("page");
+        if (pageParam != null) {
+            try {
+                pageNumber = Integer.parseInt(pageParam);
+            } catch (NumberFormatException e) {
+                pageNumber = 1;
+            }
+        }
+
+        String searchName = request.getParameter("searchName");
+        List<StaffDTO> staffList;
+
+        if (searchName != null && !searchName.isEmpty()) {
+
+            staffList = staffController.searchStaffByName(searchName);
+        } else {
+            staffList = staffController.getAllStaff(pageNumber, pageSize);
+        }
+
         int totalPages = staffController.getTotalPages(pageSize);
-        
-        // Set the staff list and pagination data in the request attribute
+
         request.setAttribute("staffList", staffList);
         request.setAttribute("pageNumber", pageNumber);
         request.setAttribute("totalPages", totalPages);
-        
-        // Forward the request to the JSP page
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/Staff/staff.jsp");
-        dispatcher.forward(request, response);
-     }
-   
+        request.setAttribute("searchName", searchName); 
+
+        request.getRequestDispatcher("/Staff/staff.jsp").forward(request, response);
+    }
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -66,7 +68,6 @@ public class StaffServlet extends HttpServlet {
 
         Date createDate = new Date(); // Current date
 
-        // Corrected: Do not pass userId since it is auto-incremented
         StaffDTO staffDTO = new StaffDTO(name, email, contactNo, password, createDate);
 
         boolean success = staffController.addStaff(staffDTO);

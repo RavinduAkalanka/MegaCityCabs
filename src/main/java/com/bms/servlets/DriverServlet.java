@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,37 +27,41 @@ public class DriverServlet extends HttpServlet {
     }
 
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		 int pageSize = 7; 
-	        int pageNumber = 1; 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	        
-	        String pageParam = request.getParameter("page");
-	        if (pageParam != null) {
-	            try {
-	                pageNumber = Integer.parseInt(pageParam);
-	            } catch (NumberFormatException e) {
-	                pageNumber = 1; 
-	            }
-	        }
+        int pageSize = 7;
+        int pageNumber = 1;
 
-	        
-	        List<DriverDTO> driverList = driverController.getAllDrivers(pageNumber, pageSize);
+        String pageParam = request.getParameter("page");
+        if (pageParam != null) {
+            try {
+                pageNumber = Integer.parseInt(pageParam);
+            } catch (NumberFormatException e) {
+                pageNumber = 1;
+            }
+        }
 
-	        
-	        int totalPages = driverController.getTotalPages(pageSize);
+        String searchDriverName = request.getParameter("searchDriverName");
+        List<DriverDTO> driverList;
 
-	        
-	        request.setAttribute("driverList", driverList);
-	        request.setAttribute("pageNumber", pageNumber);
-	        request.setAttribute("totalPages", totalPages);
+        if (searchDriverName != null && !searchDriverName.isEmpty()) {
+            
+            driverList = driverController.searchDriverByName(searchDriverName);
+        } else {
+            
+            driverList = driverController.getAllDrivers(pageNumber, pageSize);
+        }
 
-	        
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("/Driver/driver.jsp");
-	        dispatcher.forward(request, response);
-	}
+        int totalPages = driverController.getTotalPages(pageSize);
 
+        request.setAttribute("driverList", driverList);
+        request.setAttribute("pageNumber", pageNumber);
+        request.setAttribute("totalPages", totalPages);
+        request.setAttribute("searchDriverName", searchDriverName); 
+
+        request.getRequestDispatcher("/Driver/driver.jsp").forward(request, response);
+    }
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -85,7 +88,6 @@ public class DriverServlet extends HttpServlet {
             request.setAttribute("alertMessage", "Failed to add driver. License number or email may already exist.");
         }
 
-        // Forward the request to the appropriate JSP page
         request.getRequestDispatcher("/Driver/addDriver.jsp").forward(request, response);
     }
                 

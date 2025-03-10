@@ -116,5 +116,29 @@ public class CabController {
     public boolean deleteCab(int cabId) {
         return cabDAO.deleteCab(cabId);
     }
+    
+    
+    // Search Cab by Model
+    public List<CabDTO> searchCabByModel(String model) {
+        List<Cab> cabList = cabDAO.searchCabByModel(model);
+        List<CabDTO> cabDTOList = new ArrayList<>();
+
+        for (Cab cab : cabList) {
+            cabDTOList.add(new CabDTO(
+                cab.getCabId(),
+                cab.getModel(),
+                cab.getVehicleNo(),
+                cab.getOwner(),
+                cab.getFuelType(),
+                cab.getPricePerKM(),
+                cab.isAvailable(),
+                cab.getCapacity(),
+                cab.getRegistrationDate(),
+                cab.getCabImgUrl(),
+                cab.getDescription()
+            ));
+        }
+        return cabDTOList;
+    }
 
 }

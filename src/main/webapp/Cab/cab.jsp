@@ -87,6 +87,29 @@
         .table .btn-warning:hover, .table .btn-danger:hover {
             transform: scale(1.1);
         }
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .search-box input {
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            width: 250px;
+        }
+        .search-box button {
+            border-radius: 10px;
+            padding: 10px 20px;
+            background-color: #FFBF00;
+            color: black;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .search-box button:hover {
+           background-color: #e6ac00;
+        }
     </style>
 </head>
 <body>
@@ -95,7 +118,14 @@
     <div class="container">
         <div class="header">
             <h2 class="text fw-bold">Cab Management</h2>
-            <a href="Cab/addCab.jsp" class="btn btn-yellow">Add New Cab</a>
+            <div class="search-box">
+                <!-- Search Form -->
+                <form action="${pageContext.request.contextPath}/cab-servlet" method="GET">
+                    <input type="text" name="searchModel" placeholder="Search by cab model..." value="${searchModel}" />
+                    <button type="submit">Search</button>
+                </form>
+                <a href="Cab/addCab.jsp" class="btn btn-yellow">Add New Cab</a>
+            </div>
         </div>
 
         <!-- Display Success/Failure Alerts -->
@@ -160,7 +190,7 @@
             <ul class="pagination justify-content-center">
                 <c:if test="${pageNumber > 1}">
                     <li class="page-item">
-                        <a class="page-link" href="cab-servlet?page=${pageNumber - 1}">Previous</a>
+                        <a class="page-link" href="cab-servlet?page=${pageNumber - 1}&searchModel=${searchModel}">Previous</a>
                     </li>
                 </c:if>
                 <li class="page-item">
@@ -168,7 +198,7 @@
                 </li>
                 <c:if test="${pageNumber < totalPages}">
                     <li class="page-item">
-                        <a class="page-link" href="cab-servlet?page=${pageNumber + 1}">Next</a>
+                        <a class="page-link" href="cab-servlet?page=${pageNumber + 1}&searchModel=${searchModel}">Next</a>
                     </li>
                 </c:if>
             </ul>

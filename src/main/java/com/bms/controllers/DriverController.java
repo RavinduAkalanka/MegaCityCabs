@@ -112,4 +112,24 @@ public class DriverController {
 	        return driverDAO.deleteDriver(driverId);
 	    }
 	    
+	    // Search Driver by Name
+	    public List<DriverDTO> searchDriverByName(String driverName) {
+	        List<Driver> driverList = driverDAO.searchDriverByName(driverName);
+	        List<DriverDTO> driverDTOList = new ArrayList<>();
+
+	        for (Driver driver : driverList) {
+	            driverDTOList.add(new DriverDTO(
+	                driver.getDriverId(),
+	                driver.getDriverName(),
+	                driver.getEmail(),
+	                driver.getContactNo(),
+	                driver.getLicenseNo(),
+	                driver.getAddress(),
+	                driver.isAvailable(),
+	                driver.getRegisterDate()
+	            ));
+	        }
+	        return driverDTOList;
+	    }
+	    
 }

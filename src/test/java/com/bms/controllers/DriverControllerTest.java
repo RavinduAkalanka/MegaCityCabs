@@ -174,4 +174,26 @@ public class DriverControllerTest {
         assertFalse(result);
         verify(driverDAO, times(1)).deleteDriver(1);
     }
+    
+    @Test
+    public void testSearchDriverByName() {
+        // Arrange
+        String searchName = "John Doe";
+        List<Driver> driverList = new ArrayList<>();
+        driverList.add(new Driver(1, "John Doe", "john@example.com", "123456789", "LIC123", "123 Main St", true, new Date()));
+        driverList.add(new Driver(2, "John Doe", "john2@example.com", "987654321", "LIC124", "456 Main St", false, new Date()));
+
+        when(driverDAO.searchDriverByName(searchName)).thenReturn(driverList);
+
+        // Act
+        List<DriverDTO> result = driverController.searchDriverByName(searchName);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals("John Doe", result.get(0).getDriverName());
+        assertEquals("John Doe", result.get(1).getDriverName());
+        verify(driverDAO, times(1)).searchDriverByName(searchName);
+    }
+
 }

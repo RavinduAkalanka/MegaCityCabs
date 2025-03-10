@@ -157,4 +157,26 @@ public class CabControllerTest {
         assertFalse(result);
         verify(cabDAO, times(1)).deleteCab(1);
     }
+    
+    @Test
+    public void testSearchCabByModel() {
+        // Arrange
+        String searchModel = "Toyota";
+        List<Cab> cabList = new ArrayList<>();
+        cabList.add(new Cab(1, "Toyota Camry", "ABC123", "John Doe", "Petrol", 10.5, true, 4, new Date(), "image.jpg", "Comfortable sedan"));
+        cabList.add(new Cab(2, "Toyota Corolla", "XYZ456", "Jane Doe", "Diesel", 12.0, false, 5, new Date(), "image2.jpg", "Compact and fuel-efficient"));
+
+        when(cabDAO.searchCabByModel(searchModel)).thenReturn(cabList);
+
+        // Act
+        List<CabDTO> result = cabController.searchCabByModel(searchModel);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals("Toyota Camry", result.get(0).getModel());
+        assertEquals("Toyota Corolla", result.get(1).getModel());
+        verify(cabDAO, times(1)).searchCabByModel(searchModel);
+    }
+
 }
