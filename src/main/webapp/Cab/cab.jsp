@@ -219,6 +219,25 @@
                 return false; 
             }
         }
+        
+        function handleBrowserRefresh() {
+        	
+            const isPageRefreshed = performance.navigation.type === 1; 
+
+            if (isPageRefreshed) {
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.has('searchModel')) {
+                    urlParams.delete('searchModel');
+                    const newUrl = window.location.pathname + '?' + urlParams.toString();
+
+                    window.history.replaceState({}, '', newUrl);
+
+                    window.location.reload();
+                }
+            }
+        }
+
+        window.onload = handleBrowserRefresh;
     </script>
 </body>
 </html>
