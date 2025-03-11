@@ -6,6 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.web"/>
@@ -13,8 +14,19 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/mysql-connector-java-5.1.48-bin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/servlet-api.jar"/>
 	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/javax.servlet-3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/mysql-connector-j-9.2.0/mysql-connector-j-9.2.0/mysql-connector-j-9.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/jbcrypt-0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/javax.mail-1.6.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/byte-buddy-1.17.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/mockito-junit-jupiter-5.10.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/mockito-core-5.10.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/junit-platform-engine-1.10.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/junit-platform-commons-1.10.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/junit-jupiter-engine-5.10.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/junit-jupiter-api-5.10.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ravin/Downloads/JAR Files/JAR Files/opentest4j-1.3.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
